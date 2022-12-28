@@ -106,8 +106,6 @@ public class PolovniAutomobiliTests {
             new WebDriverWait(driver, Duration.ofSeconds(10))
                     .until(ExpectedConditions.elementToBeClickable(detailedSearchButton)).click();
         }
-        // In a small number of cases the test will fail because the element will be clicked too fast after scrolling,
-        // and it will still be regarded as obscured by an ad, so i used try and catch statements to circumvent that.
 
         popupCheck("btn_poll_no");
         try {
