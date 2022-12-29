@@ -1,5 +1,6 @@
 package PolovniAutomobiliPOM;
 
+import methods.MainMethods;
 import org.openqa.selenium.By;
 
 public class HomePage {

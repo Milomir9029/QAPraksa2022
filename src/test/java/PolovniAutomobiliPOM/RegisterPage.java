@@ -1,5 +1,7 @@
 package PolovniAutomobiliPOM;
 
+import methods.MainMethods;
+import methods.PropertyFile;
 import org.openqa.selenium.By;
 
 import java.io.IOException;
@@ -14,11 +16,12 @@ public class RegisterPage {
     public void typeEmail() throws IOException {
         mainMethods.type(By.id("email"), mainMethods.generateEmail());
     }
+    private PropertyFile property = new PropertyFile();
     public void typePassword() throws IOException {
-        mainMethods.type(By.id("password_first"), mainMethods.getProperty("password"));
+        mainMethods.type(By.id("password_first"), property.getProperty("password"));
     }
     public void RepeatPassword() throws IOException {
-        mainMethods.type(By.id("password_second"), mainMethods.getProperty("password"));
+        mainMethods.type(By.id("password_second"), property.getProperty("password"));
     }
     public void clickToS(){
         mainMethods.clickOn(By.id("tos"));

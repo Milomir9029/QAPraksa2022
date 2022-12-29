@@ -1,73 +1,90 @@
-import org.openqa.selenium.By;
+import SwagLabsPOM.*;
+import methods.MainMethods;
+import methods.SetUp;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.time.Duration;
+import java.io.IOException;
 
 public class SwaglabsTests {
+    private MainMethods mainMethods;
+    private SwagLabsLoginPage loginPage;
+    private SwagLabsInventoryPage inventoryPage;
+    private SwagLabsItemPage itemPage;
+    private SwagLabsCartPage cartPage;
+    private SwagLabsCheckoutPageOne checkoutPageOne;
+    private SwagLabsCheckoutPageTwo checkoutPageTwo;
+    private SwagLabsCheckoutCompletePage checkoutCompletePage;
     private WebDriver driver;
 
     @BeforeTest
-    public void setUp() {
-        System.setProperty("web-driver.chrome.driver", "C:\\IdeaProjects\\chromedriver.exe");
-
+    public void setUp() throws IOException {
+        SetUp setUp = new SetUp();
+        setUp.setProperty();
+    }
+        @BeforeMethod
+        void openWebsite(){
         driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com/");
-        WebElement loginForm = driver.findElement(By.cssSelector("#login_button_container"));
-        loginForm.findElement(By.cssSelector("#user-name")).sendKeys("standard_user");
-        loginForm.findElement(By.cssSelector("#password")).sendKeys("secret_sauce");
-
-
-        loginForm.findElement(By.cssSelector("#login-button")).click();
+        mainMethods = new MainMethods(driver);
+        loginPage = new SwagLabsLoginPage(mainMethods);
+        inventoryPage = new SwagLabsInventoryPage(mainMethods);
+        itemPage = new SwagLabsItemPage(mainMethods);
+        cartPage = new SwagLabsCartPage(mainMethods);
+        checkoutPageOne = new SwagLabsCheckoutPageOne(mainMethods);
+        checkoutPageTwo = new SwagLabsCheckoutPageTwo(mainMethods);
+        checkoutCompletePage = new SwagLabsCheckoutCompletePage(mainMethods);
+            driver.get("https://www.saucedemo.com/");
     }
 
     @Test
-    public void testProductsHeaderPresence() {
-        WebElement headerElement = driver.findElement(By.xpath("//span[.='Products']"));
-        Assert.assertTrue(headerElement.isDisplayed());
+    public void loginVerifyUi() throws IOException {
+        loginPage.typeUsername();
+        loginPage.typePassword();
+        loginPage.clickLogin();
+
+        inventoryPage.verifyProductsHeader();
+        inventoryPage.verifyCartPresence();
+        inventoryPage.verifyBurgerMenuPresence();
+        inventoryPage.verifyTwitterLinkPresence();
+        inventoryPage.verifyFBLinkPresence();
+        inventoryPage.verifyLinkedInLinkPresence();
+        inventoryPage.clickBurgerMenu();
+        inventoryPage.clickLogOut();
+    }
+    @Test
+    public void loginAddtoCartCheckout() throws IOException {
+        loginPage.typeUsername();
+        loginPage.typePassword();
+        loginPage.clickLogin();
+
+        inventoryPage.selectItem();
+
+        itemPage.verifyTitle();
+        itemPage.verifyDescription();
+        itemPage.verifyPrice();
+        itemPage.clickDddToCart();
+        itemPage.clickOpenCart();
+
+        cartPage.clickCheckout();
+
+        checkoutPageOne.typeName();
+        checkoutPageOne.typeSurname();
+        checkoutPageOne.typePostalCode();
+        checkoutPageOne.clickContinue();
+
+        checkoutPageTwo.clickFInish();
+
+        checkoutCompletePage.verifyThankYouHeader();
+        checkoutCompletePage.clickBurgerMenu();
+        checkoutCompletePage.clickLogOut();
     }
 
-    @Test
-    public void testShoppingCardPresence(){
-        WebElement shoppingCart = driver.findElement(By.cssSelector(".shopping_cart_link"));
-        Assert.assertTrue(shoppingCart.isDisplayed());
-    }
 
-    @Test
-    public void testBurgerMenuPresence(){
-        WebElement burgerMenu = driver.findElement(By.cssSelector("#react-burger-menu-btn"));
-        Assert.assertTrue(burgerMenu.isDisplayed());
-    }
-    @Test
-    public void testTwitterPresence(){
-        WebElement twitterLink = driver.findElement(By.xpath("//a[.='Twitter']"));
-        Assert.assertTrue(twitterLink.isDisplayed());
-    }
-    @Test
-    public void testFacebookPresence(){
-        WebElement fbLink = driver.findElement(By.xpath("//a[.='Facebook']"));
-        Assert.assertTrue(fbLink.isDisplayed());
-    }
-    @Test
-    public void testLinkedInPresence(){
-        WebElement LILink = driver.findElement(By.xpath("//a[.='LinkedIn']"));
-        Assert.assertTrue(LILink.isDisplayed());
-    }
-    public void logout() {
-        driver.findElement(By.cssSelector("#react-burger-menu-btn")).click();
-        WebElement logOut = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[.='Logout']")));
-        logOut.click();
-    }
 
-    @AfterTest
+
+    @AfterMethod
     public void tearDown() {
-        logout();
         driver.quit();
     }
 }

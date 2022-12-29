@@ -4,19 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d825046-06cc-4d21-946c-f8ead9852bf2" name="Changes" comment="implement tests">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/DetailedSearchPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/HomePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/LoginPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/MainMethods.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/ProfileSettingsPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/RegisterPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TestData.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/setUp.java" afterDir="false" />
+    <list default="true" id="1d825046-06cc-4d21-946c-f8ead9852bf2" name="Changes" comment="implement tests POM">
+      <change afterPath="$PROJECT_DIR$/src/test/java/SwagLabsPOM/SwagLabsCartPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/SwagLabsPOM/SwagLabsCheckoutCompletePage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/SwagLabsPOM/SwagLabsCheckoutPageOne.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/SwagLabsPOM/SwagLabsCheckoutPageTwo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/SwagLabsPOM/SwagLabsInventoryPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/SwagLabsPOM/SwagLabsItemPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/SwagLabsPOM/SwagLabsLoginPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/SwagLabsPOM/SwaglabsMethods.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/methods/PropertyFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/DetailedSearchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/DetailedSearchPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/HomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/MainMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/methods/MainMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/ProfileSettingsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/ProfileSettingsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/RegisterPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliPOM/RegisterPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/PolovniAutomobiliTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/SwaglabsTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/SwaglabsTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/SwaglabsTests2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestData.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestData.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/setUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/methods/SetUp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,23 +51,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/IdeaProjects/QAPraksa2022/src/test",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/IdeaProjects/QAPraksa2022/src/test&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="TestNG.PolovniAutomobiliTests">
-    <configuration name="C:/IdeaProjects/QAPraksa2022/testng.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+}</component>
+  <component name="RunManager" selected="TestNG.SwaglabsTests">
+    <configuration name="PolovniAutomobiliTests (1)" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="QAPraksa2022" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/testng.xml" />
-      <option name="TEST_OBJECT" value="SUITE" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="PolovniAutomobiliTests" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
@@ -70,18 +80,6 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="PolovniAutomobiliTests" />
       <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PolovniAutomobiliTests.RegisterVerifyLoginLogout" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="QAPraksa2022" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PolovniAutomobiliTests" />
-      <option name="METHOD_NAME" value="RegisterVerifyLoginLogout" />
-      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -110,12 +108,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SwaglabsTests" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="QAPraksa2022" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SwaglabsTests" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SwaglabsTests.loginVerifyUi" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="QAPraksa2022" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SwaglabsTests" />
+      <option name="METHOD_NAME" value="loginVerifyUi" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.PolovniAutomobiliTests" />
+        <item itemvalue="TestNG.SwaglabsTests" />
         <item itemvalue="TestNG.PolovniAutomobiliTests.vehicleSearch" />
-        <item itemvalue="TestNG.PolovniAutomobiliTests.RegisterVerifyLoginLogout" />
-        <item itemvalue="TestNG.C:/IdeaProjects/QAPraksa2022/testng.xml" />
+        <item itemvalue="TestNG.PolovniAutomobiliTests (1)" />
+        <item itemvalue="TestNG.SwaglabsTests.loginVerifyUi" />
+        <item itemvalue="TestNG.PolovniAutomobiliTests" />
       </list>
     </recent_temporary>
   </component>
@@ -135,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672226206498</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="implement tests POM">
+      <created>1672325888558</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1672325888558</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -151,6 +180,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="implement tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement tests" />
+    <MESSAGE value="implement tests POM" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement tests POM" />
   </component>
 </project>

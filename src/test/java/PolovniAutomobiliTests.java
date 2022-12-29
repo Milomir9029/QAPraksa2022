@@ -1,4 +1,6 @@
 import PolovniAutomobiliPOM.*;
+import methods.MainMethods;
+import methods.SetUp;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
@@ -12,8 +14,9 @@ public class PolovniAutomobiliTests {
     private DetailedSearchPage detailedSearchPage;
     private WebDriver driver;
     @BeforeTest
-    public void setUp() {
-        System.setProperty("web-driver.chrome.driver", "C:\\IdeaProjects\\chromedriver.exe");
+    public void setUp() throws IOException {
+         SetUp setUp = new SetUp();
+         setUp.setProperty();
     }
     @BeforeMethod
     void openWebsite() {
@@ -94,6 +97,4 @@ public class PolovniAutomobiliTests {
     public void tearDown() {
         driver.quit();
     }
-
-
 }

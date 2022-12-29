@@ -1,13 +1,10 @@
-package PolovniAutomobiliPOM;
-
+package methods;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.io.FileReader;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
@@ -51,14 +48,15 @@ public class MainMethods {
                 .until(ExpectedConditions.presenceOfElementLocated(locator));
         return element.getText();
     }
+    private PropertyFile property = new PropertyFile();
 
 
     public void protonVerification() throws IOException {
         driver.switchTo().newWindow(WindowType.TAB);
         driver.get("https://mail.proton.me/");
         new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.id("username"))).sendKeys(getProperty("email") + "@protonmail.com");
-        driver.findElement(By.id("password")).sendKeys(getProperty("password"));
+                .until(ExpectedConditions.elementToBeClickable(By.id("username"))).sendKeys(property.getProperty("email") + "@protonmail.com");
+        driver.findElement(By.id("password")).sendKeys(property.getProperty("password"));
         driver.findElement(By.xpath("//button[.='Sign in']")).click();
         new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("[title='Aktivirajte Vaš nalog']"))).click();
@@ -85,21 +83,13 @@ public class MainMethods {
         List<String> handleList = new ArrayList<>(handles);
         driver.switchTo().window(handleList.get(handleList.size() - tabnum));
     }
-    String rndGenerator(){
-        Random rnd = new Random();
-        return String.format("%06d", rnd.nextInt(999999));
-    }
+
     private String email;
 
-    public String getProperty(String property) throws IOException {
-        FileReader reader=new FileReader("src/test/java/TestData.properties");
-        Properties props=new Properties();
-        props.load(reader);
-        return props.getProperty(property);
-    }
+
     public String generateEmail() throws IOException {
         Random rnd = new Random();
-        email = getProperty("email") + "+"
+        email = property.getProperty("email") + "+"
                 + String.format("%06d", rnd.nextInt(999999))
                 + "@protonmail.com";
         return email;
@@ -120,7 +110,7 @@ public class MainMethods {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='permanent-delete-modal:submit']"))).click();
     }
-    void popupCheck(String elementID){
+    public void popupCheck(String elementID){
         try{
             WebElement popupElement = driver.findElement(By.id(elementID));
             if (popupElement.isDisplayed())

@@ -1,10 +1,13 @@
 package PolovniAutomobiliPOM;
 
+import methods.MainMethods;
+import methods.PropertyFile;
 import org.openqa.selenium.By;
 
 import java.io.IOException;
 
 public class LoginPage {
+    private PropertyFile property = new PropertyFile();
 
     private MainMethods mainMethods;
     public LoginPage(MainMethods mainMethods){
@@ -20,7 +23,7 @@ public class LoginPage {
         mainMethods.clickOn(By.id("next-step"));
     }
     public void enterPassword() throws IOException {
-        mainMethods.type(By.id("password_header"), mainMethods.getProperty("password"));
+        mainMethods.type(By.id("password_header"), property.getProperty("password"));
     }
     public void clickLogin(){
         mainMethods.clickOn(By.name("login"));

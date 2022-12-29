@@ -1,5 +1,6 @@
 package PolovniAutomobiliPOM;
 
+import methods.MainMethods;
 import org.openqa.selenium.By;
 
 public class DetailedSearchPage {
@@ -16,7 +17,12 @@ public class DetailedSearchPage {
     }
     public void chooseModel(){
         mainMethods.clickOn(By.xpath("//span[.=' Svi modeli']"));
-        mainMethods.clickOn(By.xpath("//label[.='\n" + "\t\tA4\n" + "\t']"));
+        try {
+            mainMethods.clickOn(By.xpath("//label[.='\n" + "\t\tA4\n" + "\t']"));
+        }catch (Exception ignored){
+            mainMethods.clickOn(By.xpath("//span[.=' Svi modeli']"));
+            mainMethods.clickOn(By.xpath("//label[.='\n" + "\t\tA4\n" + "\t']"));
+        }
     }
     public void setPriceFrom(){
         mainMethods.type(By.id("price_from"), "5000");
