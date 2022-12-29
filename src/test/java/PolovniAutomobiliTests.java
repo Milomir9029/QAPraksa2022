@@ -1,20 +1,15 @@
+import PolovniAutomobiliPOM.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.*;
-
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
+import java.io.IOException;
 public class PolovniAutomobiliTests {
-    String email = "seleniumilosevic+" + rndGenerator() + "@protonmail.com";
-    String password = "QApraksa2022";
+    private MainMethods mainMethods;
+    private HomePage homePage;
+    private LoginPage loginPage;
+    private RegisterPage registerPage;
+    private ProfileSettingsPage profileSettingsPage;
+    private DetailedSearchPage detailedSearchPage;
     private WebDriver driver;
     @BeforeTest
     public void setUp() {
@@ -23,188 +18,82 @@ public class PolovniAutomobiliTests {
     @BeforeMethod
     void openWebsite() {
         driver = new ChromeDriver();
+        mainMethods = new MainMethods(driver);
+        homePage = new HomePage(mainMethods);
+        loginPage = new LoginPage(mainMethods);
+        registerPage = new RegisterPage(mainMethods);
+        profileSettingsPage = new ProfileSettingsPage(mainMethods);
+        detailedSearchPage = new DetailedSearchPage(mainMethods);
+
         driver.manage().window().maximize();
         driver.get("https://www.polovniautomobili.com/");
     }
     @Test
-    public void RegisterVerifyLoginLogout(){
-        WebElement postavi_oglas = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-label='Postavi oglas']")));
-        postavi_oglas.click();
-        driver.findElement(By.xpath("//a[.='Registruj se']")).click();
-        driver.findElement(By.id("email")).sendKeys(email);
-        driver.findElement(By.id("password_first")).sendKeys(password);
-        driver.findElement(By.id("password_second")).sendKeys(password);
-        driver.findElement(By.id("tos")).click();
-        driver.findElement(By.id("easySaleConsent")).click();
-        driver.findElement(By.id("easyBuyConsent")).click();
-        driver.findElement(By.xpath("//button[.='Registruj se']")).click();
+    public void RegisterVerifyLoginLogout() throws IOException {
+        homePage.clickPost();
+        loginPage.clickRegister();
 
-        protonVerification();
-        switchTabs(1);
+        registerPage.typeEmail();
+        registerPage.typePassword();
+        registerPage.RepeatPassword();
+        registerPage.clickToS();
+        registerPage.clickEasySaleConsent();
+        registerPage.clickEasyBuyConsent();
+        registerPage.clickRegister();
 
-        driver.findElement(By.id("interestedInReviewingOffer")).click();
-        driver.findElement(By.name("submit_registration_survey")).click();
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[.='U redu']"))).click();
+        mainMethods.protonVerification();
+        mainMethods.switchTabs(1);
 
-        new WebDriverWait(driver, Duration.ofSeconds(5))
-                .until(ExpectedConditions.elementToBeClickable(By.id("first_name"))).sendKeys("Milomir");
-        driver.findElement(By.id("last_name")).sendKeys("Milosevic");
-        driver.findElement(By.id("address")).sendKeys("Sopic ");
-        driver.findElement(By.id("city")).sendKeys("Lazarevac");
-        driver.findElement(By.xpath("//span[.=' Odaberite okrug']")).click();
-        driver.findElement(By.xpath("//label[.='Beograd (širi)']")).click();
-        driver.findElement(By.id("cellphone")).sendKeys("0641234567");
-        driver.findElement(By.id("submit")).click();
+        profileSettingsPage.checkReviewingOffer();
+        profileSettingsPage.submitSurvey();
+        profileSettingsPage.clickOkay();
 
-        WebElement successMessage = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".uk-alert-success")));
-        Assert.assertTrue(successMessage.isDisplayed());
-        String dropdownDivContent = "\n" +
-                "\t\t\t\t\t\t\t\t\tMOJ PROFIL ";
-        String xpathExpression = "//div[contains(text(), '" + dropdownDivContent + "')]";
-        WebElement dropdowntrigger = driver.findElement(By.xpath(xpathExpression));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(dropdowntrigger).perform();
-        WebElement logOutElement = driver.findElement(By.cssSelector(".uk-button-dropdown")).findElement(By.cssSelector(".uk-dropdown"))
-                .findElement(By.cssSelector("li:last-child"));
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(logOutElement)).click();
+        profileSettingsPage.enterName();
+        profileSettingsPage.enterSurname();
+        profileSettingsPage.enterAdress();
+        profileSettingsPage.enterCity();
+        profileSettingsPage.chooseRegion();
+        profileSettingsPage.enterCellphone();
+        profileSettingsPage.clickSubmit();
+        profileSettingsPage.checkSuccessMessage();
+        profileSettingsPage.hoverLogout();
+        profileSettingsPage.clickLogout();
 
-            new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/login']/parent::div/parent::*"))).click();
+        homePage.clickLogin();
+        loginPage.enterEmail();
+        loginPage.clickNextStep();
+        loginPage.enterPassword();
+        loginPage.clickLogin();
+        homePage.verifyEmail();
 
-
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.id("username_header"))).sendKeys(email);
-        driver.findElement(By.id("next-step")).click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.id("password_header"))).sendKeys(password);
-        driver.findElement(By.name("login")).click();
-        WebElement currentEmail = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".ym-hide-content")));
-        String currentEmailText = currentEmail.getText();
-        org.testng.Assert.assertEquals(currentEmailText, email);
-
-        switchTabs(2);
-        deleteEmail();
+        mainMethods.switchTabs(2);
+        mainMethods.deleteEmail();
     }
 
     @Test
     public void vehicleSearch()  {
-        WebElement detailedSearchButton = driver.findElement(By.name("isDetailed"));
-        Actions actions = new Actions(driver);
-        actions.moveToElement(detailedSearchButton);
-        actions.sendKeys(Keys.PAGE_DOWN);
-        try {
-            actions.perform();
-            new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.elementToBeClickable(detailedSearchButton)).click();
-        } catch (Exception ignored){
-            actions.perform();
-            new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.elementToBeClickable(detailedSearchButton)).click();
-        }
+        homePage.scrollToDetailedSearch();
+        homePage.clickDetailedSearch();
 
-        popupCheck("btn_poll_no");
-        try {
-            new WebDriverWait(driver, Duration.ofSeconds(3))
-                    .until(ExpectedConditions.elementToBeClickable(By.xpath("//span[.=' Marka']"))).click();
-        } catch (TimeoutException ignore){
-            detailedSearchButton.click();
-            popupCheck("btn_poll_no");
-            new WebDriverWait(driver, Duration.ofSeconds(3))
-                    .until(ExpectedConditions.elementToBeClickable(By.xpath("//span[.=' Marka']"))).click();
-        }
-        driver.findElement(By.xpath("//label[.='Audi']")).click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath("//span[.=' Svi modeli']"))).click();
-        driver.findElement(By.xpath("//label[.='\n" + "\t\tA4\n" + "\t']")).click();
-        driver.findElement(By.id("price_from")).sendKeys("5000");
-        driver.findElement(By.id("price_to")).sendKeys("8000");
-        driver.findElement(By.xpath("//span[.=' Karoserija']")).click();
-        driver.findElement(By.xpath("//label[.='Limuzina']/parent::*")).click();
-        driver.findElement(By.xpath("//span[.=' Vrsta goriva']")).click();
-        driver.findElement(By.xpath("//label[.='Benzin']")).click();
-        driver.findElement(By.xpath("//span[.=' Region']")).click();
-        driver.findElement(By.xpath("//label[.='Beograd']/parent::*")).click();
-        driver.findElement(By.xpath("//span[.=' Godina od']")).click();
-        driver.findElement(By.xpath("//label[.='2005 god.']")).click();
-        driver.findElement(By.xpath("//span[.=' do']")).click();
-        driver.findElement(By.xpath("//div[@class='SumoSelect sumo_year_to open']//div//ul//li[5]")).click();
-        driver.findElement(By.xpath("//span[.=' Broj vrata']")).click();
-        driver.findElement(By.xpath("//label[.='4/5 vrata']/parent::*")).click();
-        driver.findElement(By.id("submit_1")).click();
+        detailedSearchPage.popUpCheckAndClose();
 
-
+        detailedSearchPage.chooseCarMake();
+        detailedSearchPage.chooseModel();
+        detailedSearchPage.setPriceFrom();
+        detailedSearchPage.setPriceTo();
+        detailedSearchPage.chooseBodyStyle();
+        detailedSearchPage.chooseFuelType();
+        detailedSearchPage.chooseRegion();
+        detailedSearchPage.setYearFrom();
+        detailedSearchPage.setYearTo();
+        detailedSearchPage.setDoorNumber();
+        detailedSearchPage.clickSearch();
     }
 
     @AfterMethod
     public void tearDown() {
-        //driver.quit();
+        driver.quit();
     }
 
-
-
-    String rndGenerator(){
-        Random rnd = new Random();
-        return String.format("%06d", rnd.nextInt(999999));
-    }
-
-    void protonVerification(){
-        driver.switchTo().newWindow(WindowType.TAB);
-        driver.get("https://mail.proton.me/");
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.id("username"))).sendKeys(email);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.xpath("//button[.='Sign in']")).click();
-        new WebDriverWait(driver, Duration.ofSeconds(20))
-                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("[title='Aktivirajte Vaš nalog']"))).click();
-        WebElement iframe = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-subject='Aktivirajte Vaš nalog']")));
-        driver.switchTo().frame(iframe);
-        WebElement link = new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@href, 'aktivacija-naloga')]")));
-        try {
-            link.click();
-            driver.switchTo().defaultContent();
-            new WebDriverWait(driver, Duration.ofSeconds(5))
-                    .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[.='Confirm']"))).click();
-        } catch (Exception ignored) {
-            driver.switchTo().frame(iframe);
-            link.click();
-            driver.switchTo().defaultContent();
-            new WebDriverWait(driver, Duration.ofSeconds(5))
-                    .until(ExpectedConditions.elementToBeClickable(By.xpath("//button[.='Confirm']"))).click();
-        }
-    }
-
-    void switchTabs(int tabnum){
-        Set<String> handles = driver.getWindowHandles();
-        List<String> handleList = new ArrayList<>(handles);
-        driver.switchTo().window(handleList.get(handleList.size() - tabnum));
-    }
-
-    void deleteEmail(){
-        driver.findElement(By.cssSelector("[data-testid='toolbar:movetotrash']")).click();
-        driver.findElement(By.cssSelector("[title='More']")).click();
-        driver.findElement(By.cssSelector("[data-testid='navigation-link:trash']")).click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='message-column:sender-address']")));
-        driver.findElement(By.cssSelector("[data-testid='toolbar:select-all-checkbox']")).click();
-        driver.findElement(By.cssSelector("[data-testid='toolbar:deletepermanently']")).click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='permanent-delete-modal:submit']"))).click();
-    }
-    void popupCheck(String elementID){
-        try{
-            WebElement popupElement = driver.findElement(By.id(elementID));
-            if (popupElement.isDisplayed())
-                popupElement.click();
-
-        } catch (NoSuchElementException ignored){
-        }
-    }
 
 }
